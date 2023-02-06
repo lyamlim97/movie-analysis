@@ -15,15 +15,14 @@ CREATE TABLE IF NOT EXISTS fact_name_basics (
 );
 
 CREATE TABLE IF NOT EXISTS fact_title_akas (
-    title_id text UNIQUE NOT NULL,
-    ordering bigint,
+    title_id text NOT NULL,
+    ordering bigint NOT NULL,
     title text,
     region text,
     language_name text,
-    TYPES text,
+    title_type text,
     attritutes text,
-    is_original_title boolean,
-    PRIMARY KEY (title_id)
+    is_original_title boolean
 );
 
 CREATE TABLE IF NOT EXISTS fact_title_basics (
@@ -55,13 +54,12 @@ CREATE TABLE IF NOT EXISTS fact_title_episode(
 );
 
 CREATE TABLE IF NOT EXISTS fact_title_principals (
-    title_id text UNIQUE NOT NULL,
-    ordering bigint,
+    title_id text NOT NULL,
+    ordering bigint NOT NULL,
     name_id text,
     category text,
     job text,
-    characters text,
-    PRIMARY KEY (title_id)
+    characters text
 );
 
 CREATE TABLE IF NOT EXISTS fact_title_ratings (
@@ -81,8 +79,7 @@ COPY fact_name_basics(
     known_for_titles
 )
 FROM
-    'C:\Users\Dante\Desktop\Projects\movie-sentiment-analysis\data\name.basics.csv' DELIMITER ',
-' CSV HEADER;
+    'C:\Users\Dante\Desktop\Projects\movie-sentiment-analysis\data\name.basics.csv' DELIMITER ',' CSV HEADER;
 
 COPY fact_title_akas(
     title_id,
@@ -90,13 +87,12 @@ COPY fact_title_akas(
     title,
     region,
     language_name,
-    TYPES,
+    title_type,
     attritutes,
     is_original_title
 )
 FROM
-    'C:\Users\Dante\Desktop\Projects\movie-sentiment-analysis\data\title.akas.csv' DELIMITER ',
-' CSV HEADER;
+    'C:\Users\Dante\Desktop\Projects\movie-sentiment-analysis\data\title.akas.csv' DELIMITER ',' CSV HEADER;
 
 COPY fact_title_basics(
     title_id,
@@ -110,13 +106,11 @@ COPY fact_title_basics(
     genres
 )
 FROM
-    'C:\Users\Dante\Desktop\Projects\movie-sentiment-analysis\data\title.basics.csv' DELIMITER ',
-' CSV HEADER;
+    'C:\Users\Dante\Desktop\Projects\movie-sentiment-analysis\data\title.basics.csv' DELIMITER ',' CSV HEADER;
 
 COPY fact_title_crew(title_id, directors, writers)
 FROM
-    'C:\Users\Dante\Desktop\Projects\movie-sentiment-analysis\data\title.crew.csv' DELIMITER ',
-' CSV HEADER;
+    'C:\Users\Dante\Desktop\Projects\movie-sentiment-analysis\data\title.crew.csv' DELIMITER ',' CSV HEADER;
 
 COPY fact_title_episode(
     title_id,
@@ -125,8 +119,7 @@ COPY fact_title_episode(
     episode_number
 )
 FROM
-    'C:\Users\Dante\Desktop\Projects\movie-sentiment-analysis\data\title.episode.csv' DELIMITER ',
-' CSV HEADER;
+    'C:\Users\Dante\Desktop\Projects\movie-sentiment-analysis\data\title.episode.csv' DELIMITER ',' CSV HEADER;
 
 COPY fact_title_principals(
     title_id,
@@ -137,8 +130,7 @@ COPY fact_title_principals(
     characters
 )
 FROM
-    'C:\Users\Dante\Desktop\Projects\movie-sentiment-analysis\data\title.principals.csv' DELIMITER ',
-' CSV HEADER;
+    'C:\Users\Dante\Desktop\Projects\movie-sentiment-analysis\data\title.principals.csv' DELIMITER ',' CSV HEADER;
 
 COPY fact_title_ratings(
     title_id,
@@ -146,5 +138,4 @@ COPY fact_title_ratings(
     num_of_votes
 )
 FROM
-    'C:\Users\Dante\Desktop\Projects\movie-sentiment-analysis\data\title.ratings.csv' DELIMITER ',
-' CSV HEADER;
+    'C:\Users\Dante\Desktop\Projects\movie-sentiment-analysis\data\title.ratings.csv' DELIMITER ',' CSV HEADER;
